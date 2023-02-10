@@ -18,7 +18,7 @@
     - 로드뷰 버튼 클릭 시 로드뷰 오버레이 켜짐 및 꺼짐
     - 현재 위치 버튼 클릭 시 현재 위치로 지도 중심 이동
 
-- 앱 다운로드 : https://expo.dev/artifacts/eas/hCJB8VmMPkNVDJGVnEbWYn.apk
+- 앱 다운로드 : https://expo.dev/artifacts/eas/5rReVcQLURseb3rvbN8ubz.apk
 
 
 
