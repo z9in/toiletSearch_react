@@ -7,7 +7,7 @@
 - 공공데이터 활용 : 경기도 공중화장실 위치 데이터
 - 카카오 MAP API활용 
 
-#### 수정/보완  : https://web-toiletsearch-react-422t024lbonwoan.gksl2.cloudtype.app/
+#### 수정/보완
 - REACT로 재작성
 - 디자인 수정 : 
     - 기본 지도 크기 증가
@@ -16,16 +16,9 @@
    
 - 기능 추가 :
     - 로드뷰 버튼 클릭 시 로드뷰 오버레이 켜짐 및 꺼짐
-    - 현재 위치 버튼 클릭 시 현재 위치로 지도 중심 이동.
-
-<기존 디자인>     
-
-![크기변환 KakaoTalk_20230207_154602912](https://user-images.githubusercontent.com/113665653/218005785-1595627c-845a-4029-8397-6094e0ac3fe3.jpg)
+    - 현재 위치 버튼 클릭 시 현재 위치로 지도 중심 이동
 
 
 
-<변경 디자인>
 
-![크기변환 KakaoTalk_20230210_131701887](https://user-images.githubusercontent.com/113665653/218005800-42ff9089-8634-4113-aeac-d1bdfc2e6d9b.jpg)
-
-
+![Frame 1](https://user-images.githubusercontent.com/113665653/218007936-4f8f791f-20ea-446e-a7ff-b5e496059b34.jpg)
