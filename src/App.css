@@ -33,12 +33,14 @@
 }
 .containers .mapsRange #roadViews {
   width: 100%;
-  height: 30%;
+  height: 50%;
   position: absolute;
   left: 0;
   bottom: 0;
   z-index: 2;
-  /* background-color: red; */
+  background-color: white;
+  padding-top: 25%;
+  text-align: center;
 }
 
 .containers .sendBox {
@@ -67,18 +69,14 @@
 .containers .btns {
   width: 100%;
   height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
   display: flex;
   justify-content: space-between;
 }
 .containers .btns button {
-  width: 34%;
+  width: 48%;
   background-color: white;
   border: none;
   border: 2px solid #ccc;
-}
-.containers .btns button:nth-child(2) {
-  width: 34%;
-  background-color: white;
-  border-left: none;
-  border-right: none;
 }
