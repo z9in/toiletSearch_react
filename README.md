@@ -14,7 +14,4 @@
 ![크기변환 KakaoTalk_20230207_154602912](https://user-images.githubusercontent.com/113665653/218005785-1595627c-845a-4029-8397-6094e0ac3fe3.jpg)
 ![크기변환 KakaoTalk_20230210_131701887](https://user-images.githubusercontent.com/113665653/218005800-42ff9089-8634-4113-aeac-d1bdfc2e6d9b.jpg)
 
-<기존 디자인>
-
-
-<변경 디자인>
+<기존 디자인>          <변경 디자인>
