@@ -27,7 +27,7 @@ export default function Btns({ setGeo, views, setViews }) {
                 );
               },
               function (error) {
-                alert("문제있음");
+               (`ERROR(${err.code}): ${err.message}`);
                 setGeo("군포시");
               },
               { timeout: 1000 }
