@@ -13,7 +13,14 @@
 
     ![image](https://user-images.githubusercontent.com/113665653/218359590-810830c0-8ad3-4b12-b2f3-6c3b2b397888.png)
 
-    
+
+- 기능 보완
+    - 지역 검색 중, '로딩 중' 이미지 반영            
+        ![크기변환 KakaoTalk_20230213_141006490](https://user-images.githubusercontent.com/113665653/218376051-ef03b292-1c06-4ea3-851d-d5bc325a202d.jpg)
+
+
+
+
 ### 2023.02.10.
 
 ## 1. 추가 및 수정/보완 기능 명세
