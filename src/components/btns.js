@@ -30,7 +30,7 @@ export default function Btns({ setGeo, views, setViews }) {
                alert(`ERROR(${error.code}): ${error.message}`);
                 setGeo("군포시");
               },
-              { timeout: 1000 }
+//               { timeout: 1000 }
             );
           } else {
             alert("no geolocation support");
