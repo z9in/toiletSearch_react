@@ -27,8 +27,8 @@ export default function Btns({ setGeo, views, setViews }) {
                 );
               },
               function (error) {
-                console.log("문제있음");
-                setGeo("안양시 장내로125번길");
+                alert("문제있음");
+                setGeo("군포시");
               },
               { timeout: 1000 }
             );
