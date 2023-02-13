@@ -1,5 +1,21 @@
 # 내 주변 공중화장실 검색 - 경기도
 
+### 2023.02.13.
+- 오류 수정 
+    - 현재위치 버트 클릭시 오류 발생 => 사용자 위치확인 권한 허용
+    - app.json 내에 다음의 내용 첨부("permissions": ["ACCESS_FINE_LOCATION"])
+   ![image](https://user-images.githubusercontent.com/113665653/218359711-6c191322-2396-48a3-92bc-35c0f72a3f6b.png)
+    
+    - 앱 구동 시 상단의 상태표시줄과 겹침현상 발생
+    - StatusBar 콤포넌트 추가하여 해결
+    
+    import { StatusBar } from "expo-status-bar";
+
+    ![image](https://user-images.githubusercontent.com/113665653/218359590-810830c0-8ad3-4b12-b2f3-6c3b2b397888.png)
+
+    
+
+
 ## 1. 추가 및 수정/보완 기능 명세
 ### 2023.02.10.
 #### 기존 버전 코드 : https://github.com/z9in/toilet_around_me
