@@ -2,11 +2,12 @@ import React from "react";
 
 const { kakao } = window;
 
-export default function Btns({ setGeo, views, setViews }) {
+export default function Btns({ setGeo, views, setViews, setZIndex }) {
   return (
     <div className="btns">
       <button
         onClick={() => {
+          setZIndex(3);
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
               function (position) {
@@ -27,10 +28,10 @@ export default function Btns({ setGeo, views, setViews }) {
                 );
               },
               function (error) {
-               alert(`ERROR(${error.code}): ${error.message}`);
-                setGeo("군포시");
+                console.log("문제있음");
+                setGeo("안양시 장내로125번길");
               },
-//               { timeout: 1000 }
+              { timeout: 1000 }
             );
           } else {
             alert("no geolocation support");

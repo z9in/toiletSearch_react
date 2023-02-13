@@ -10,6 +10,7 @@ function App() {
   const [geo, setGeo] = useState("안양시 장내로125번길");
   const [mapPoint, setMapPoint] = useState([]);
   const [views, setViews] = useState("none");
+  const [zIndex, setZIndex] = useState(0);
   // 카카오지도 세팅
   const mapSetting = function () {
     const mapViewsEl = document.getElementById("mapViews");
@@ -50,6 +51,7 @@ function App() {
         image: markerImage, // 마커 이미지
       });
     }
+    setZIndex(0);
   };
   // 로드뷰 세팅
   const roadviewSetting = function (map) {
@@ -81,11 +83,17 @@ function App() {
         setMapPoint={setMapPoint}
         views={views}
         mapPoint={mapPoint}
+        zIndexNum={zIndex}
       />
       {/* 검색 입력 */}
-      <Search setGeo={setGeo} />
+      <Search setGeo={setGeo} setZIndex={setZIndex} />
       {/* 편의 기능 버튼 */}
-      <Btns setGeo={setGeo} setViews={setViews} views={views} />
+      <Btns
+        setGeo={setGeo}
+        setViews={setViews}
+        views={views}
+        setZIndex={setZIndex}
+      />
     </div>
   );
 }

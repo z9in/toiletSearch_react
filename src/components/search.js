@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 
-export default function Search({ setGeo }) {
+export default function Search({ setGeo, setZIndex }) {
   const getGeo = useRef();
   return (
     <div className="sendBox">
@@ -22,6 +22,7 @@ export default function Search({ setGeo }) {
         type="submit"
         value="발송"
         onClick={() => {
+          setZIndex(3);
           setGeo(getGeo.current.value);
           getGeo.current.value = "";
         }}
