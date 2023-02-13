@@ -14,10 +14,10 @@
     ![image](https://user-images.githubusercontent.com/113665653/218359590-810830c0-8ad3-4b12-b2f3-6c3b2b397888.png)
 
     
-
+### 2023.02.10.
 
 ## 1. 추가 및 수정/보완 기능 명세
-### 2023.02.10.
+
 #### 기존 버전 코드 : https://github.com/z9in/toilet_around_me
 - HTML 및 CSS, JAVASCRIP로 작성
 - 공공데이터 활용 : 경기도 공중화장실 위치 데이터
