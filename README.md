@@ -1,5 +1,18 @@
 # 내 주변 공중화장실 검색 - 경기도
 
+### 2023.02.15.
+- 코드 수정 
+    - kakao-maps-sdk 모듈 활용
+    - 관련자료 : https://react-kakao-maps-sdk.jaeseokim.dev/
+
+- 기능 보완
+    - 지역 내 화장실 위치 마커 실행 시 검색 지역 단위로 자료 간소화 후 마커 실행
+    
+    ![image](https://user-images.githubusercontent.com/113665653/218954019-fa28f0c3-8dd8-40ec-abc7-220e658b9641.png)
+
+
+
+
 ### 2023.02.13.
 - 오류 수정 
     - 현재위치 버트 클릭시 오류 발생 => 사용자 위치확인 권한 허용
