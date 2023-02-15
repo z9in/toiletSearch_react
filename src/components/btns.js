@@ -1,56 +1,36 @@
 import React from "react";
-
-const { kakao } = window;
-
-export default function Btns({ setGeo, views, setViews, setZIndex }) {
+export default function Btns({ setGeo, kakao, setRegion, viewsfunc }) {
   return (
     <div className="btns">
       <button
         onClick={() => {
-          setZIndex(3);
           if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-              function (position) {
-                var geocoder = new kakao.maps.services.Geocoder();
-                var coord = new kakao.maps.LatLng(
-                  position.coords.latitude,
-                  position.coords.longitude
-                );
-                var callback = function (result, status) {
-                  if (status === kakao.maps.services.Status.OK) {
-                    setGeo(result[0].address.address_name);
-                  }
-                };
-                geocoder.coord2Address(
-                  coord.getLng(),
-                  coord.getLat(),
-                  callback
-                );
-              },
-              function (error) {
-                console.log("문제있음");
-                setGeo("안양시 장내로125번길");
-              },
-              { timeout: 1000 }
-            );
-          } else {
-            alert("no geolocation support");
+            navigator.geolocation.getCurrentPosition(function (position) {
+              let new_geo = [
+                {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                },
+              ];
+              setGeo(new_geo);
+              var geocoder = new kakao.maps.services.Geocoder();
+              geocoder.coord2Address(
+                new_geo[0].lng,
+                new_geo[0].lat,
+                function (result) {
+                  let new_region =
+                    "경기도 " + result[0].address.region_2depth_name;
+
+                  setRegion(new_region);
+                }
+              );
+            });
           }
         }}
       >
         현재 위치
       </button>
-      <button
-        onClick={() => {
-          if (views == "none") {
-            setViews("block");
-          } else {
-            setViews("none");
-          }
-        }}
-      >
-        로드뷰 보기
-      </button>
+      <button onClick={viewsfunc}>로드뷰 보기</button>
     </div>
   );
 }

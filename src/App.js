@@ -1,98 +1,114 @@
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
-import kyunggiToilet from "./kyunggi_toilets.json";
-import Maps from "./components/maps";
+import { Map, MapMarker, Roadview } from "react-kakao-maps-sdk";
+import kyunggi2 from "./kyunggi_toilets.json";
 import Search from "./components/search";
 import Btns from "./components/btns";
 const { kakao } = window;
-const { geolocation } = navigator;
 function App() {
-  const [geo, setGeo] = useState("안양시 장내로125번길");
-  const [mapPoint, setMapPoint] = useState([]);
+  const [geo, setGeo] = useState([{ lat: 37.566826, lng: 126.9786567 }]);
+  const [position, setPosition] = useState([
+    { lat: 37.566826, lng: 126.9786567 },
+  ]);
+  const [region, setRegion] = useState("경기도 안양");
   const [views, setViews] = useState("none");
-  const [zIndex, setZIndex] = useState(0);
-  // 카카오지도 세팅
-  const mapSetting = function () {
-    const mapViewsEl = document.getElementById("mapViews");
-    let geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(geo, search);
-    function search(result, status) {
-      const options = {
-        center: new kakao.maps.LatLng(result[0].y, result[0].x),
-        level: 3,
-      };
-      const map = new kakao.maps.Map(mapViewsEl, options);
-      setMapPoint(map);
-      return markSetting(map), roadviewSetting(map);
+  const [markers, setMarkers] = useState([]);
+  const getGeo = useRef();
+  const viewsfunc = function () {
+    if (views == "none") {
+      setViews("block");
+    } else {
+      setViews("none");
     }
-  };
-  // 주변 공중화장실 마커 세팅
-  const markSetting = function (map) {
-    let coords = kyunggiToilet.map((e) => [
-      {
-        title: e.PBCTLT_PLC_NM,
-        lat1: e.REFINE_WGS84_LAT,
-        lat2: e.REFINE_WGS84_LOGT,
-      },
-    ]);
-    var imageSrc =
-      "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-    for (var i = 0; i < coords.length; i++) {
-      // 마커 이미지의 이미지 크기 입니다
-      var imageSize = new kakao.maps.Size(20, 30);
-      // 마커 이미지를 생성합니다
-      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-      // 마커를 생성합니다
-      new kakao.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        title: coords[i][0].title,
-
-        position: new kakao.maps.LatLng(coords[i][0].lat1, coords[i][0].lat2), // 마커를 표시할 위치
-        image: markerImage, // 마커 이미지
-      });
-    }
-    setZIndex(0);
-  };
-  // 로드뷰 세팅
-  const roadviewSetting = function (map) {
-    // 지도에 클릭 이벤트를 등록합니다
-    // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-    kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-      // 클릭한 위도, 경도 정보를 가져옵니다
-      var latlng = mouseEvent.latLng;
-      var roadviewContainer = document.getElementById("roadViews"); //로드뷰를 표시할 div
-      var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-      var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
-      var position = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng());
-      // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
-      roadviewClient.getNearestPanoId(position, 50, function (panoId) {
-        roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
-      });
-    });
   };
   useEffect(() => {
-    mapSetting();
-  }, [geo]);
-
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        let new_geo = [
+          {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+        ];
+        setGeo(new_geo);
+        setPosition(new_geo);
+      });
+    } else {
+      alert("no geolocation support");
+    }
+  }, []);
+  useEffect(() => {
+    let arr = [];
+    kyunggi2.map((e) => {
+      if (e.REFINE_LOTNO_ADDR.indexOf(region) > -1) {
+        arr.push(e);
+      }
+    });
+    setMarkers(arr);
+  }, [region]);
   return (
     <div className="containers">
       <h1>내 주변 공중화장실</h1>
-      {/* 지도 그리기 */}
-      <Maps
-        geo={geo}
-        setMapPoint={setMapPoint}
-        views={views}
-        mapPoint={mapPoint}
-        zIndexNum={zIndex}
+      <div className="mapsRange">
+        <Map
+          id="mapViews"
+          center={{
+            lat: geo[0].lat,
+            lng: geo[0].lng,
+          }}
+          level={3}
+          onClick={(_t, mouseEvent) =>
+            setPosition([
+              {
+                lat: mouseEvent.latLng.getLat(),
+                lng: mouseEvent.latLng.getLng(),
+              },
+            ])
+          }
+        >
+          {markers.map((position, index) => (
+            // console.log(position.lat)
+            <MapMarker
+              key={index}
+              position={{
+                lat: position.REFINE_WGS84_LAT,
+                lng: position.REFINE_WGS84_LOGT,
+              }} // 마커를 표시할 위치
+              image={{
+                src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                size: {
+                  width: 24,
+                  height: 35,
+                }, // 마커이미지의 크기입니다
+              }}
+              title={position.name} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            />
+          ))}
+        </Map>
+        <Roadview
+          id="roadViews"
+          position={{
+            // 지도의 중심좌표
+            lat: position[0].lat,
+            lng: position[0].lng,
+            radius: 50,
+          }}
+          style={{
+            display: views,
+          }}
+        ></Roadview>
+      </div>
+      <Search
+        setGeo={setGeo}
+        setRegion={setRegion}
+        getGeo={getGeo}
+        kakao={kakao}
       />
-      {/* 검색 입력 */}
-      <Search setGeo={setGeo} setZIndex={setZIndex} />
-      {/* 편의 기능 버튼 */}
       <Btns
         setGeo={setGeo}
-        setViews={setViews}
-        views={views}
-        setZIndex={setZIndex}
+        setRegion={setRegion}
+        viewsfunc={viewsfunc}
+        kakao={kakao}
       />
     </div>
   );
