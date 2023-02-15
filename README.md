@@ -4,7 +4,7 @@
 - 코드 수정 
     - kakao-maps-sdk 모듈 활용
     - 관련자료 : https://react-kakao-maps-sdk.jaeseokim.dev/
-
+    - 기존코드 : https://github.com/z9in/toilet_react_ver1
 - 기능 보완
     - 지역 내 화장실 위치 마커 실행 시 검색 지역 단위로 자료 간소화 후 마커 실행
     
